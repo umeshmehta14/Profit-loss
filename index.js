@@ -31,20 +31,26 @@ function SubmitHandler() {
     var ip = Number(initial.value);
     var qty = Number(quantity.value);
     var curr = Number(current.value);
-
-    if(ip === 0 || qty === 0 || curr === 0)
-    {
-        ShowOutput("Enter All fields", 1);
+    if(ip === 0){
+        ShowOutput("Stocks cannot be bought at 0 price", 1);
     }
     else{
-        if(ip < 0 || qty < 0 || curr < 0){
-            ShowOutput("Enter Positive Number", 1);
+
+        
+        if(ip === 0 || qty === 0 || curr === 0)
+        {
+            ShowOutput("Enter All fields", 1);
         }
         else{
-            CalculateProfitLoss(ip, qty, curr);
+            if(ip < 0 || qty < 0 || curr < 0){
+                ShowOutput("Enter Positive Number", 1);
+            }
+            else{
+                CalculateProfitLoss(ip, qty, curr);
+            }
         }
     }
-}
+    }
 
 
 function ShowOutput(msg ,n) {
