@@ -12,7 +12,7 @@ function CalculateProfitLoss(ip ,qs, cs) {
         var lossper = (loss/ip) * 100;
         var lossper1 = parseFloat(lossper).toFixed(2);
         out.style.color = 'red';
-        ShowOutput(`Hey the loss is ${loss} and the percent is ${lossper1}%`);
+        ShowOutput(`Hey the loss is ${loss} and the percent is ${lossper1}%`, 1);
     }
     else if(cs > ip){
         // profit logic here
@@ -20,29 +20,40 @@ function CalculateProfitLoss(ip ,qs, cs) {
         var profitper = (profit / ip) * 100;
         var profitper1 = parseFloat(profitper).toFixed(2);
         out.style.color = 'green';
-        ShowOutput(`Hey the profit is ${profit} and the percent is ${profitper1}%`);
+        ShowOutput(`Hey the profit is ${profit} and the percent is ${profitper1}%`,0);
     }
     else{
-        ShowOutput("No pain no gain and no gain no pain");
+        ShowOutput("No pain no gain and no gain no pain",0);
     }
 }
 
-function SubmitHandler(params) {
+function SubmitHandler() {
     var ip = Number(initial.value);
     var qty = Number(quantity.value);
     var curr = Number(current.value);
 
     if(ip === 0 || qty === 0 || curr === 0)
     {
-        ShowOutput("Enter All fields");
+        ShowOutput("Enter All fields", 1);
     }
     else{
-        CalculateProfitLoss(ip, qty, curr);
+        if(ip < 0 || qty < 0 || curr < 0){
+            ShowOutput("Enter Positive Number", 1);
+        }
+        else{
+            CalculateProfitLoss(ip, qty, curr);
+        }
     }
 }
 
 
-function ShowOutput(msg) {
+function ShowOutput(msg ,n) {
+    if(n===1){
+        out.style.color = "red";
+    }
+    else{
+        out.style.color = "green";
+    }
     out.innerText = msg;
 }
 
