@@ -27,22 +27,33 @@ function CalculateProfitLoss(ip ,qs, cs) {
     }
 }
 
-function SubmitHandler(params) {
+function SubmitHandler() {
     var ip = Number(initial.value);
     var qty = Number(quantity.value);
     var curr = Number(current.value);
 
     if(ip === 0 || qty === 0 || curr === 0)
     {
-        ShowOutput("Enter All fields");
+        ShowOutput("Enter All fields", 1);
     }
     else{
-        CalculateProfitLoss(ip, qty, curr);
+        if(ip < 0 || qty < 0 || curr < 0){
+            ShowOutput("Enter Positive Number", 1);
+        }
+        else{
+            CalculateProfitLoss(ip, qty, curr);
+        }
     }
 }
 
 
-function ShowOutput(msg) {
+function ShowOutput(msg ,n) {
+    if(n===1){
+        out.style.color = "red";
+    }
+    else{
+        out.style.color = "green";
+    }
     out.innerText = msg;
 }
 
